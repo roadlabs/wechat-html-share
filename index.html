@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!-- by Uncle Neo -->
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>假装得成就</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="full-screen" content="true">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="360-fullscreen" content="true">
+    <style type="text/css">
+
+    *,h1,h2,h3,p{
+        font-family: \5E7C\5706, Mircosoft Yahei, Tahoma;
+    }
+
+    body {
+            text-align: center;
+            background: #e0e4cc;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            height: 100%;
+            font-family:  \5E7C\5706, Mircosoft Yahei, Tahoma;
+            color: #f38630;
+            line-height: 1.3em;
+        }
+        
+        html {
+            -ms-touch-action: none;
+        }
+        
+        .form {
+            background: #e0e4cc;
+        }
+
+        
+        input[type=text] {
+            -webkit-appearance:none;
+            background: #a7dbd8;
+            border: 2px solid #69d2e7;
+            border-radius: 5px;
+            width: 80%;
+            color: #fa6900;
+            font-weight: 600;
+        }
+        
+        input[type=reset] {
+            -webkit-appearance:none;
+            background: #f38630;
+            color: white;
+            border: 2px solid #f38630;
+            border-radius: 5px;
+            width: 30%;
+            height: auto;
+            text-align: center;
+            margin: 5px;
+            padding: 5px;
+            font-size: 1em;
+        }
+        
+        input[type=submit] {
+            -webkit-appearance:none;
+            background: #fa6900;
+            color: white;
+            border: 2px solid #fa6900;
+            border-radius: 5px;
+            width: 30%;
+            height: auto;
+            text-align: center;
+            margin: 5px;
+            padding: 5px;
+            font-size: 1em;
+        }
+        
+        .buttons {
+            margin-top: 3px;
+        }
+
+        
+        .container {
+            background: #e0e4cc;
+        }
+        
+        
+        .maskshow {
+            display:block;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            text-align:center;
+            color:#fff;
+            font-size:24px;
+            line-height:2em;
+            background:rgba(0,0,0,0.83);
+        }
+        .maskshow .arron {
+            position:absolute;
+            top:5px;
+            right:5px;
+            width:100px;
+            height:100px;
+            background:url(http://www.jiazhewang.com/smallprojs/fakeTitle/image/arron.png) no-repeat;
+            background-size:100px 100px;
+        }
+        
+        .maskshow p {
+            padding-top:80px;
+        }
+        
+        
+        .maskhide{display:none;}
+        
+        #intro {
+            color:#fa6900;
+            font-size:larger;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        
+    </style>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js">
+</script>
+</head>
+
+<body>
+    <div id="bgDiv" style="background: black; position:relative;">
+        <div class="container">
+            <div id="intro">
+                <!--                 <h1><strong>假装分享</strong></h1> -->
+
+                <p><strong>哈哈，被骗了吧！你也可以哦！快来生成一个假冒的分享链接吧！</strong></p>
+            </div>
+
+            <div class="form">
+                <p><strong>输入标题:</strong>(必填)朋友圈里只显示标题哦</p><input type="text" name="fakeTitle" value="我在xx游戏中获得了第1名！"><br>
+
+                <p><strong>输入简介:</strong>发送给朋友时显示,圈里木有</p><input type="text" name="fakeContent" value="这是一个没节操的游戏。。"><br>
+
+                <p><strong>缩略图URL地址:</strong>(可选)不设置就是默认</p><input type="text" name="fakeImgURL" value="http://www.balabala.com/somepic.jpg"><br>
+
+                <p style="color:red;"><strong>设置完成后请先点击“确认分享”哦！</strong></p>
+
+                <div class="buttons">
+                    <input id="submitBtn" type="submit" value="确认分享"> <input id="resetBtn" type="reset" value="清空输入">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mask" class="maskhide">
+        <div class="arron"></div>
+
+        <p id="msg">请点击右上角<br>
+        点击【分享到朋友圈】<br>
+        骗骗你的小伙伴吧！</p>
+    </div><script type="text/javascript">
+
+    // image url
+    var imgUrl = "http://www.jiazhewang.com/smallprojs/fakeTitle/image/geekneo8080.jpg";
+
+    // timeLine link
+    var timeLineLink = "http://www.jiazhewang.com/smallprojs/fakeTitle/";
+
+    // share title
+    var tTitle = "小游戏总刷不够，不如直接得成就！";
+
+    // share content
+    var tContent = "生成任意的朋友圈分享链接，可以冒充成就，纯粹恶搞，满足一下你的虚荣心吧！";
+
+    // weibo link
+    var weiboLink = timeLineLink;
+
+    // weibo content
+    var wContent = tContent;
+
+    window.shareData = {
+        "imgUrl": imgUrl,
+        "timeLineLink": timeLineLink,
+        "tTitle": tTitle,
+        "tContent": tContent,
+        "weiboLink": weiboLink,
+        "wContent": wContent
+    };
+    </script> <script>
+$(document).ready(function(){
+        
+            $("input[name='fakeTitle']").click(function(){
+                $(this).val("");
+            });
+            
+            $("input[name='fakeContent']").click(function(){
+                $(this).val("");
+            });
+            
+            $("input[name='fakeImgURL']").click(function(){
+                $(this).val("");
+            });
+            
+            $("#mask").click(function(){
+                $("#mask").removeClass("maskshow");
+                $("#mask").addClass("maskhide");
+            });
+            
+            $("#resetBtn").click(function(){
+                $("input[name='fakeTitle']").val("");
+                $("input[name='fakeContent']").val("");
+                $("input[name='fakeImgURL']").val("");
+            });
+            
+            $("#submitBtn").click(function(){
+                // image url
+                if ($("input[name='fakeImgURL']").val() !== ""){
+                    imgUrl = $("input[name='fakeImgURL']").val();
+                }
+                if(imgUrl === "http://www.balabala.com/somepic.jpg"){
+                    imgUrl = "";
+                }
+
+                // share title
+                tTitle = $("input[name='fakeTitle']").val();
+
+                // share content
+                tContent = $("input[name='fakeContent']").val();
+
+                // weibo content
+                wContent = tContent;
+                
+                window.shareData = {
+                    "imgUrl": imgUrl,
+					"timeLineLink": timeLineLink,
+					"tTitle": tTitle,
+					"tContent": tContent,
+					"weiboLink": weiboLink,
+					"wContent": wContent
+				};
+                
+                $("#mask").removeClass("maskhide");
+                $("#mask").addClass("maskshow");
+            });
+            
+        });
+    </script> <script type="text/javascript">
+if(typeof(window.shareData)==='undefined'){
+    window.shareData = {
+        "imgUrl": imgUrl,
+        "timeLineLink": timeLineLink,
+        "tTitle": tTitle,
+        "tContent": tContent,
+        "weiboLink": weiboLink,
+        "wContent": wContent
+    };
+    }
+
+
+
+    var returnURL = 'http://www.jiazhewang.com/smallprojs/fakeTitle/';
+
+    // wechat share event listener
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        
+        // share to friend chat
+        WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function(res) {
+                document.location.href = returnURL;
+            })
+        });
+
+        // share to moments
+        WeixinJSBridge.on('menu:share:timeline', function(argv) {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": window.shareData.imgUrl,
+                "img_width": "640",
+                "img_height": "640",
+                "link": window.shareData.timeLineLink,
+                "desc": window.shareData.tContent,
+                "title": window.shareData.tTitle
+            }, function(res) {
+                document.location.href = returnURL;
+            });
+        });
+
+        // share to weibo
+        WeixinJSBridge.on('menu:share:weibo', function(argv) {
+            WeixinJSBridge.invoke('shareWeibo', {
+                "content": window.shareData.wContent,
+                "url": window.shareData.timeLineLink
+            }, function(res) {
+                document.location.href = returnURL;
+            });
+        });
+
+        }, false)
+
+    </script>
+</body>
+</html>
